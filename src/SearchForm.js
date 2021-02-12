@@ -1,24 +1,30 @@
 import React, { Component } from "react";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 import "./SearchForm.css";
 
 class SearchForm extends Component {
 	constructor(props) {
 		super(props);
 		
-		this.state = {movieName: ""}
+		this.state = {movieName: "", poster: ""}
 		this.handleChange = this.handleChange.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 	}
 	
 	handleClick() {
-		console.log(this.state.movieName)
-		const url = `https://www.omdbapi.com/?apikey=thewdb&t=${this.state.movieName}&y=&plot=short&r=json`;
-		
+		// console.log(this.state.movieName)
+		const url = `https://www.omdbapi.com/?apikey=thewdb&t=${this.state.movieName}&y=&plot=full&r=json`;
 		axios.get(url)
 		  .then((response) => {
 			console.log(response.data);
-			console.log(response.status);
+			this.props.history.push({
+			  pathname: `/${response.data.Title}`,
+			  state: {
+				  movieName: response.data.Title,
+				  poster: response.data.Poster
+			  }
+			})
 		  });
 	}
 	
