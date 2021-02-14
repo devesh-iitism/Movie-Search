@@ -50,7 +50,13 @@ class SearchForm extends Component {
 		return (
 			<form onSubmit={this.handleSubmit}>
 			  <div className="mb-3 searchBar">
-				<input onChange={this.handleChange} type="text" className="form-control" id="movieName" aria-describedby="movieName" />
+				<input
+					onChange={this.handleChange}
+					type="text" className="form-control"
+					id="movieName" 
+					aria-describedby="movieName" 
+					placeholder="Search Movie Name..."
+				/>
 			  </div>
 			  <button type="submit" className="btn btn-primary">Search</button>
 			</form>
